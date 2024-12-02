@@ -1,0 +1,10 @@
+{:paths ["src" "resources"]
+ :deps {org.clojure/clojure {:mvn/version "1.12.0"}
+        juxt/clip {:mvn/version "0.29.0"}
+        com.datomic/local {:mvn/version "1.0.285"}
+        metosin/reitit {:mvn/version "0.7.2"}
+        http-kit/http-kit {:mvn/version "2.9.0-alpha1"}
+        hiccup/hiccup {:mvn/version "2.0.0-RC4"}}
+ :aliases {:dev {:extra-paths ["dev"]
+                 :extra-deps {org.clojure/tools.namespace {:mvn/version "1.5.0"}}}
+           :run {:main-opts ["-m" "l-clip2.core"]}}}

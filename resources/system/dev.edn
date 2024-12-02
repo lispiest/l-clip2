@@ -1,0 +1,10 @@
+{:components
+ {:cfg {:start {:server-type :datomic-local
+                :system "db"}}
+  :client {:start (l-clip2.db/client (clip/ref :cfg))}
+  :db {:pre-start (l-clip2.db/create (clip/ref :client) "l-clip2")
+       :start (l-clip2.db/connect (clip/ref :client) "l-clip2")
+       :post-start l-clip2.db/seed}
+  :handler {:start (l-clip2.route/handler (clip/ref :db))}
+  :http {:start (org.httpkit.server/run-server (clip/ref :handler))
+         :stop (this)}}}
