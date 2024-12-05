@@ -24,10 +24,16 @@
       (xact data))))
 
 (defn eid-title [conn]
-  (d/q '[:find ?e ?title
-         :where
-         [?e :movie/title ?title]]
-       (d/db conn)))
+  (-> (d/q '[:find ?e ?title
+          :where
+          [?e :movie/title ?title]]
+        (d/db conn))
+      sort))
 
 (defn all-data-by-eid [conn eid]
   (d/pull (d/db conn) '[*] eid))
+
+(defn new-movie [conn [{:keys [title genre year]}]]
+  (d/transact conn {:tx-data [{:movie/title title
+                               :movie/genre genre
+                               :movie/release-year (Long/parseLong year)}]}))
