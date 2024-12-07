@@ -7,7 +7,8 @@
         hiccup/hiccup {:mvn/version "2.0.0-RC4"}
         metosin/muuntaja {:mvn/version "0.6.10"}
         metosin/muuntaja-form {:mvn/version "0.6.10"}
-        ring/ring-core {:mvn/version "1.13.0"}}
+        ring/ring-core {:mvn/version "1.13.0"}
+        babashka/fs {:mvn/version "0.5.23"}}
  :aliases {:dev {:extra-paths ["dev"]
                  :extra-deps {org.clojure/tools.namespace {:mvn/version "1.5.0"}}}
            :run {:main-opts ["-m" "l-clip2.core"]}}}

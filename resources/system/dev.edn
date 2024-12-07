@@ -1,6 +1,7 @@
 {:components
- {:cfg {:start {:server-type :datomic-local
-                :system "db"}}
+ {:local-storage {:start (l-clip2.db/local-storage)}
+  :cfg {:start {:server-type :datomic-local
+                :system (clip/ref :local-storage)}}
   :client {:start (l-clip2.db/client (clip/ref :cfg))}
   :db {:pre-start (l-clip2.db/create (clip/ref :client) "l-clip2")
        :start (l-clip2.db/connect (clip/ref :client) "l-clip2")

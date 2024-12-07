@@ -1,6 +1,25 @@
 (ns l-clip2.db
   (:require [datomic.client.api :as d]
-            [l-clip2.util :refer [read-edn]]))
+            [l-clip2.util :refer [read-edn]]
+            [babashka.fs :as fs]
+            [clojure.string :as string]))
+
+(defn local-storage []
+  (let [f "local.edn"
+        d ".datomic"
+        system "db"
+        h (fs/home)
+        p1 (fs/path (-> h (str "/" d)))
+        p2 (fs/path (-> h (str "/" d "/" f)))
+        p3 (fs/path (-> h (str "/" system)))]
+    (if-not (fs/exists? p1)
+      (do (fs/create-dir p1)
+          (fs/create-file p2)
+          (fs/write-bytes p2 (.getBytes (String. (str "{:storage-dir \"" h "\"}"))))))
+    (if-not (fs/exists? p3)
+      (do (fs/create-dir p3)
+          system)
+      system)))
 
 (defn client [cfg]
   (d/client cfg))

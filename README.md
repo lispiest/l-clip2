@@ -1,10 +1,3 @@
-### [Configure Local Storage](https://docs.datomic.com/datomic-local.html#storage-dir)
-```bash
-~ $ cd
-~ $ mkdir -p ~/.datomic
-~ $ echo "{:storage-dir "$PWD"}" > ~/.datomic/local.edn
-~ $ mkdir -p ~/db
-```
 ### PLAY (REPL)
 ```bash
 $ clj -M:dev
